@@ -1,0 +1,162 @@
+{
+    "$schema": "../../../extension.schema.json",
+    "$id": "my-extension",
+    "$version": "1.0.0",
+    "$vendor": "Your name or company name",
+    "$name": "plugin1",
+    "$description": "demo plugin",
+    "$license": "MIT",
+    
+    "features": {
+      "navbar": [
+        {
+          "id": "app.navbar.primary",
+          "items": [
+            {
+              "id": "app.navbar.menu",
+              "children": [
+                {
+                  "id": "app.navbar.personalFiles",
+                  "title": "Custom Personal Files",
+                  "icon": "yard",
+                  "description": "Custom Description"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "search": [
+          {
+            "id": "my.search.custom",
+            "order": 50,
+            "name": "My Search",
+            "default": false,
+            "filterWithContains": true,
+            "aca:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG", "UIP:PolicyNumber", "UIP:DocumentDescription"],
+            "include": ["path", "allowableOperations", "properties"],
+            "aca:triggeredOnChange": false,
+            "resetButton": true,
+            "filterQueries": [
+              { "query": "+ASPECT:'UIP:PolicyAspect'" }
+            ],
+            "facetFields": {
+              "expanded": true,
+              "fields": [
+                {
+                  "mincount": 1,
+                  "field": "creator",
+                  "label": "SEARCH.FACET_FIELDS.CREATOR",
+                  "settings": {
+                    "allowUpdateOnChange": false,
+                    "hideDefaultAction": true,
+                    "facetOrder": 200
+                  }
+                },
+                {
+                  "mincount": 1,
+                  "field": "modifier",
+                  "label": "SEARCH.FACET_FIELDS.MODIFIER",
+                  "settings": {
+                    "allowUpdateOnChange": false,
+                    "hideDefaultAction": true,
+                    "facetOrder": 300
+                  }
+                }
+              ]
+            },
+            "categories": [
+              {
+                "id": "customEffectiveDate",
+                "name": "Effective Date",
+                "enabled": true,
+                "component": {
+                  "selector": "date-range",
+                  "settings": {
+                    "field": "UIP:EffectiveDate",
+                    "dateFormat": "dd-MMM-yy",
+                    "displayedLabelsByField": {
+                      "UIP:EffectiveDate": "Effective Date"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "MyCustomdocSource",
+                "name": "Doc Source",
+                "enabled": true,
+                "component": {
+                  "selector": "radio",
+                  "pageSize": 5,
+                  "settings": {
+                      "operator": "OR",
+                      "allowUpdateOnChange": true,
+                      "options": [
+                          { "name": "Any", "value": "" },
+                          { "name": "Scan", "value": "UIP:DocumentSource:scanned" },
+                          { "name": "Fax", "value": "UIP:DocumentSource:faxed" },
+                          { "name": "E-Mail", "value": "UIP:DocumentSource:email" },
+                          { "name": "External", "value": "UIP:DocumentSource:external" }
+                      ]
+                  }
+                }
+              },
+              {
+                "id": "filterPolicyNumber",
+                "name": "Policy Number",
+                "enabled": true,
+                "expanded": true,
+                "component": {
+                    "selector": "text",
+                    "settings": {
+                        "searchSuffix": "*",
+                        "field": "UIP:PolicyNumber",
+                        "placeholder": "Enter the Policy Number",
+                        "allowUpdateOnChange": true
+                    }
+                }
+              }
+            ]
+          },
+          {
+            "id": "app.search.default",
+            "aca:fields": ["UIP:PolicyNumber"]
+          }
+      ],
+      "content-metadata-presets": [
+          {
+            "id": "app.content.metadata.custom",
+            "custom": [
+              {
+                "id": "my.custom.metadata.PoliciesGroup",
+                "title": "My Custom UI Policy title",
+                "items": [
+                    {
+                        "id": "app.content.metadata.customSetting",
+                        "includeAll": false
+                    },
+                    {
+                        "id": "my.custom.metadata.UIPolicy",
+                        "aspect": "UIP:PolicyAspect",
+                        "properties": [
+                            "UIP:DocumentSource",
+                            "UIP:PolicyNumber",
+                            "UIP:DocumentDescription",
+                            "UIP:EffectiveDate"
+                        ]
+                    }
+                ]
+              },
+              {
+                "id": "app.content.metadata.customSetting",
+                "exclude": [
+                  "UIP:Policy",
+                  "UIP:PolicyAspect"
+                ]
+              }
+            ]
+          }
+      ]
+    }
+}
+    
