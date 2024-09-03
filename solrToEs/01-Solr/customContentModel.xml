@@ -19,7 +19,7 @@
             <associations/>
             <overrides/>
             <mandatory-aspects>
-                <aspect>UIP:PolicyAspect</aspect>
+                <aspect>Lisbon:ConfidentialAspect</aspect>
             </mandatory-aspects>
         </type>
     </types>
