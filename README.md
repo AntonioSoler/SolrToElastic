@@ -4,7 +4,7 @@
 
 The code in this repository is released under the Apache License, see the [LICENSE](./LICENSE) file for details.
 
-## Instructions
+## Preparing for Migration
 
 ### Preliminary
 
@@ -85,17 +85,63 @@ The images have already been downloaded to the VMs - the containers will spin up
 1. Go to **Custom Personal Files**.
 2. Select **Shared**.
 3. Create two folders: _Aspects_ and _Types_.
+
 4. Right click on the **Aspects** folder.
    * Select **Manage Rules**, then **Create Rule**.
    * Name the Rule **Aspect Rule**.
    * Set the following specifications:
        * **When**: Items are created or enter this folder
        * **Perform Actions**: Add aspect
-       * **Aspect**: "ConfidentialAspect [Libson:ConfidentialAspect"
+       * **Aspect**: "ConfidentialAspect [Libson:ConfidentialAspect]"
        * **Other Options**: Rule applies to subfolders
 5. Click _Create_.
 
+6. Migrate back to the **Shared** folder.
 
+7. Right click on the **Types** folder.
+   * Select **Manage Rules**, then **Create Rule**.
+   * Name the Rule **Types Rule**.
+   * Set the following specifications:
+       * **When**: Items are created or enter this folder
+       * **Perform Actions**: Specialise Type
+       * **Aspect**: "LisbonType [Libson:CustomType]"
+       * **Other Options**: Rule applies to subfolders
+8. Click _Create_.
+
+9. Migrate back to the **Shared** folder.
+
+10. Select the **Types** folder
+11. Click _Upload_.
+12. Open **solrToEs** and then **02-ES**.
+13. Select and _Upload_ **mediation-filter.yml**. This will act as a test file for re-indexing.
+
+14. Migrate back to the **Shared** folder.
+
+15. 10. Select the **Aspects** folder
+16. Click _Upload_.
+17. Open **solrToEs** and then **01-Solr**.
+18. Select and _Upload_ **docker-compose.yml**. This will act as a test file for re-indexing.
+
+19. Navigate to **localhost:8080/alfresco**.
+20. Select **Alfresco Administration Console (admin only)**.
+   * The User/Password is admin/admin
+21. On the Left Navigation Panel, scroll down to _Support Tools_, then select **Node Browser**.
+22. Click _Root List_.
+23. Scroll to Children and select **app:company_home**.
+24. Scroll to Children and select **app:shared**.
+25. Scroll to Children and select **cm:Aspect**.
+26. Scroll to Children and select **cm:docker-compose.yml**.
+27. Scroll to Aspects and verify that the _Confidental Aspect [Lisbon:ConfidentialAspect]_ is there. (_Note:_ Scroll to the top and notice that the Type is cm:content)
+
+28. Click the Parent to go up, then click the Parent again to get to the Shared folder.
+
+29. Scroll to _Children_ and select **cm:Type**.
+30. Scroll to _Children_ and select **cm:mediation-filter.yml**.
+31. Scroll to _Aspects_ and verify that the _Confidental Aspect [Lisbon:ConfidentialAspect]_ is there. (_Note:_ Scroll to the top and notice that the Type is _LisbonType [Lisbon:CustomType_)
+32. To verify that both yml files have been uploaded, go to Query, select fts-alfresco, and execute a search for yml.
+33. In Left Navigation Panel, select Search Service.
+34. Verify that the system is configured to use Solr 6.
+  
 
 
   [here]:https://github.com/GBHyland/Alfresco-TechQuest-Class-Preparation?tab=readme-ov-file#alfresco-migrations-solr-to-elasticsearch--acs-embedded-workflows-to-aps
