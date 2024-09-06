@@ -142,6 +142,90 @@ The images have already been downloaded to the VMs - the containers will spin up
 33. In Left Navigation Panel, select Search Service.
 34. Verify that the system is configured to use Solr 6.
   
+## Starting the Migration
 
+1. Navigate to **localhost:8080/alfresco**.
+2. Select **Alfresco WebScripts Home (admin only – INTERNAL)**.
+3. Select **Browse by Web Script Package**.
+4. Select **/alfresco/model**.
+5. Select **GET alfresco/s/model/ns-prefix-map**.
+6. Highlight and copy this text.
+   * Open the _Text Editor_ and paste this text here.
+   * Save the document as **ModelPrefixes.json** to the `solrToEs/02-ES/re-indexing` folder.
+
+7. In the file explorer, navigate to the `solrToEs/02-ES` folder.
+8. Open the **docker-compose.yml** file.
+9. Edit line 69 as shown below:
+   * ./re-indexing/**ModelPrefixes.json**:/opt/reindex.prefixes.json
+10. Save the **docker-compose.yml** file.
+
+### Deploying Elasticsearch
+
+1. Open a new tab in Terminal
+   * The new tab will probably open in the 'solrToEs/01-Solr` directory. You need to be in the `solrToEs/02-ES` directory. You can do this by entering these two lines separately:
+     ```
+     cd ..
+     cd 02-ES
+     ```
+2. Run the command `docker compose up elasticsearch`.
+3. In the Web Browser, navigate to **localhost:9200/_cat/indices**. We can confirm that Elasticsearch is running.
+
+### Connecting to Elasticsearch
+
+1. Navigate to **localhost:8080/alfresco**.
+2. Select **Alfresco Administration Console (admin only)**.
+   * The User/Password is admin/admin
+3. In the Left Navigation Panel, select **Search Service**.
+4. Go to the _Search Service in User_ drop-down menu and slect **Elasticsearch**.
+5. Go to _Elasticsearch Hostname_ and name it **elasticsearch**.
+6. Click _Save_.
+7. Refresh the page and select **Test Connection**. This should be successful.
+8. Navigate to **localhost:9200/_cat/indices**. There will be a new "Alfresco" value.
+
+### Re-Indexing
+
+1. Open a new tab in Terminal. This should still be in the `solrToEs/02-ES` directory.
+2. Run the command `docker compose up re-indexing`.
+3. This will exit with **Code 0**. Nothing to worry about - it means it was successful.
+4. Navigate to **localhost:8080/alfresco**.
+5. Select **Alfresco Administration Console (admin only)**.
+   * The User/Password is admin/admin
+6. In the Left Navigation Panel, select **Node Browser**.
+7. Select _Query_.
+8. Select **fts.alfresco** from the drop-down menu.
+9. Execute a search for **yml**.
+
+### Live Indexing
+
+1. In the terminal, ensure you are in the `solrToEs/02-ES`.
+2. Run the command `docker compose up live-indexing`.
+3. Open the Web Broswer and navigate to **localhost:8080/workspace**.
+4. Select **Custom Personal Files**.
+5. Select **Shared**.
+6. Select the **Aspects** folder.
+7. Select **Upload**.
+8. Within the File Explorer, upload **solrToEs.zip**.
+
+### Testing Elasticsearch Live Indexing
+
+1. Navigate to **localhost:8080/alfresco**.
+2. Select **Alfresco Administration Console (admin only)**.
+   * The User/Password is admin/admin
+3. In the Left Navigation Panel, select **Node Browser**.
+4. Go to _Query_
+5. Select **fts-alfresco** from the drop-down menu.
+6. Execute a search for **zip**. You should see the **solrToEs.zip** file - confirming that the Solr to Elasticsearch migration has occured successfully.
+
+We can do one more test to confirm that Solr is no longer indexing.
+
+1. In the Left Navigation Panel, select **Search Service**.
+2. In _Search Service in Use_, select **Solr6** from the drop-down menu.
+3. Click _Save_.
+4. In the Left Navigation Panel, select **Node Browser**.
+5. Go to _Query_
+6. Select **fts-alfresco** from the drop-down menu.
+7. Execute a search for **zip**. You will no longer see the **solrToEs.zip** file.
+
+Follow steps 1-3, but switch to Elasticsearch to move back to your newly migrated and configured search service! Congratulations!
 
   [here]:https://github.com/GBHyland/Alfresco-TechQuest-Class-Preparation?tab=readme-ov-file#alfresco-migrations-solr-to-elasticsearch--acs-embedded-workflows-to-aps
