@@ -45,7 +45,13 @@ This will download the new XML file into your 01-Solr folder. If you have issues
     
 3. If this runs successfully, it's time to deploy the `01-Solr` environment.
    * Ensure you are in `solrToEs/01-Solr` directory.
+We need to create in advance an external network to connect later Elastic's docker container with this one
 
+```
+docker network create myNetwork 
+```
+
+Then bootstrap the environment with the command:
 ```
 docker compose up
 ```
