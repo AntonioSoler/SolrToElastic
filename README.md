@@ -176,6 +176,7 @@ The images have already been downloaded to the VMs - the containers will spin up
      ```
 2. Run the command `docker compose up elasticsearch`.
 3. In the Web Browser, navigate to **localhost:9200/_cat/indices**. We can confirm that Elasticsearch is running.
+4. the web page should show only one line as the default database is the only one present
 
 ### Connecting to Elasticsearch
 
@@ -187,7 +188,7 @@ The images have already been downloaded to the VMs - the containers will spin up
 5. Go to _Elasticsearch Hostname_ and name it **elasticsearch**.
 6. Click _Save_.
 7. Refresh the page and select **Test Connection**. This should be successful.
-8. Navigate to **localhost:9200/_cat/indices**. There will be a new "Alfresco" value.
+8. Navigate to **localhost:9200/_cat/indices**. There will be a new index created "Alfresco" value (2 lines shown).
 
 ### Re-Indexing
 
