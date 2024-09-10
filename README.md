@@ -195,6 +195,10 @@ The images have already been downloaded to the VMs - the containers will spin up
 7. Refresh the page and select **Test Connection**. This should be successful.
 8. Navigate to **localhost:9200/_cat/indices**. There will be a new index created "Alfresco" value (2 lines shown).
 
+### Cross-locale configuration
+
+If you need cross locale configuration, add your configuration before starting the indexing process, as described in [Alfresco documentation](https://docs.alfresco.com/search-enterprise/latest/config/#exact-term-search). By default this configuration is [disabled](https://github.com/Alfresco/alfresco-enterprise-repo/blob/master/repository/src/main/resources/alfresco/search/elasticsearch/config/exactTermSearch.properties).
+
 ### Re-Indexing
 
 1. Open a new tab in Terminal. This should still be in the `solrToEs/02-ES` directory.
