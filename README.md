@@ -99,7 +99,7 @@ The images have already been downloaded to the VMs - the containers will spin up
    * Set the following specifications:
        * **When**: Items are created or enter this folder
        * **Perform Actions**: Add aspect
-       * **Aspect**: "ConfidentialAspect [Libson:ConfidentialAspect]"
+       * **Aspect**: "DossierAspect [Libson:DossierAspect]"
        * **Other Options**: Rule applies to subfolders
 5. Click _Create_.
 
@@ -138,7 +138,7 @@ The images have already been downloaded to the VMs - the containers will spin up
 24. Scroll to Children and select **app:shared**.
 25. Scroll to Children and select **cm:Aspect**.
 26. Scroll to Children and select **cm:docker-compose.yml**.
-27. Scroll to Aspects and verify that the _Confidental Aspect [Lisbon:ConfidentialAspect]_ is there. (_Note:_ Scroll to the top and notice that the Type is cm:content)
+27. Scroll to Aspects and verify that the _DossierAspect Aspect [Lisbon:DossierAspect]_ is there. (_Note:_ Scroll to the top and notice that the Type is cm:content)
 
 28. Click the Parent to go up, then click the Parent again to get to the Shared folder.
 
@@ -157,14 +157,16 @@ The images have already been downloaded to the VMs - the containers will spin up
 4. Select **/alfresco/model**.
 5. Select **GET alfresco/s/model/ns-prefix-map**.
 6. Highlight and copy this text.
-   * Open the _Text Editor_ and paste this text here.
-   * Save the document as **ModelPrefixes.json** to the `solrToEs/02-ES/re-indexing` folder.
+   * Open the _Text Editor_ and paste this text here or from the browser select "Save as"
+   * Save the document as **ModelPrefixes.json** to the `solrToEs/02-ES/re-indexing` folder. (
 
 7. In the file explorer, navigate to the `solrToEs/02-ES` folder.
 8. Open the **docker-compose.yml** file.
 9. Edit line 69 as shown below:
    * ./re-indexing/**ModelPrefixes.json**:/opt/reindex.prefixes.json
 10. Save the **docker-compose.yml** file.
+11. edit the **solrToEs/02-ES/re-indexing/mediation-filter.yml**
+12. we want to exclude the Confidential files from the indexing so we need to add the confidential Aspect after line 6 and put the lisbon:ConfidentialAspect
 
 ### Deploying Elasticsearch
 
@@ -226,13 +228,16 @@ The images have already been downloaded to the VMs - the containers will spin up
 
 We can do one more test to confirm that Solr is no longer indexing.
 
-1. In the Left Navigation Panel, select **Search Service**.
-2. In _Search Service in Use_, select **Solr6** from the drop-down menu.
-3. Click _Save_.
-4. In the Left Navigation Panel, select **Node Browser**.
-5. Go to _Query_
-6. Select **fts-alfresco** from the drop-down menu.
-7. Execute a search for **zip**. You will no longer see the **solrToEs.zip** file.
+
+### tail-Indexing
+
+In the event that some unexpected event happens during the server operation there is the option to reindex a range of dates using the reindexing component with different parameters
+
+You can see the configuration in **the docker-compose.yml** file in the section  **tail-re-rendexing**
+
+1. Open a new tab in Terminal. This should still be in the `solrToEs/02-ES` directory.
+2. Run the command `docker compose up tail-re-indexing`.
+3. This will exit with **Code 0**. Nothing to worry about - it means it was successful.
 
 Follow steps 1-3, but switch to Elasticsearch to move back to your newly migrated and configured search service! Congratulations!
 
