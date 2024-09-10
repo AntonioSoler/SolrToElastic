@@ -201,6 +201,8 @@ If you need cross locale configuration, add your configuration before starting t
 
 ### Re-Indexing
 
+>> Verify the different options to index metadata, content and path before re-indexing, as described in [Alfresco Documentation](https://docs.alfresco.com/search-enterprise/latest/admin/#enabling-and-disabling-re-indexing-features-recommendations)
+
 1. Open a new tab in Terminal. This should still be in the `solrToEs/02-ES` directory.
 2. Run the command `docker compose up re-indexing`.
 3. This will exit with **Code 0**. Nothing to worry about - it means it was successful.
