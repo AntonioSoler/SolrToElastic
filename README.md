@@ -211,7 +211,7 @@ If you need cross locale configuration, add your configuration before starting t
    * The User/Password is admin/admin
 6. In the Left Navigation Panel, select **Node Browser**.
 7. Select _Query_.
-8. Select **fts.alfresco** from the drop-down menu.
+8. Select **fts-alfresco** from the drop-down menu.
 9. Execute a search for **yml**.
 
 >> If progress monitoring is required, [parallel reindexing](https://hub.alfresco.com/t5/alfresco-content-services-blog/alfresco-search-enterprise-3-2-deploying-at-scale/ba-p/316047) is recommended. This process is relying in [Spring Batch](https://docs.spring.io/spring-batch/reference/scalability.html) framework, that provides all the information related to the process. Note that an additional database, dedicated to this parallel reindexing process is required in this use case.
