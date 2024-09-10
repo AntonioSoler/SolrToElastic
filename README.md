@@ -181,6 +181,8 @@ The images have already been downloaded to the VMs - the containers will spin up
 3. In the Web Browser, navigate to **localhost:9200/_cat/indices**. We can confirm that Elasticsearch is running.
 4. the web page should show only one line as the default database is the only one present
 
+>> Note that we have set the `alfresco` index to be created by default in [alfresco compose.yaml](https://github.com/AntonioSoler/SolrToElastic/blob/main/solrToEs/01-Solr/docker-compose.yml#L55C9-L55C52) file, on a production deployment you may [create the index](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html) in Elasticsearch by yourself applying recommended settings, like clustering policies.
+
 ### Connecting to Elasticsearch
 
 1. Navigate to **localhost:8080/alfresco**.
