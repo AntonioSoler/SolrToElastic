@@ -22,18 +22,19 @@ Currently, within the `solrToEs/01-Solr` directory, there is a file `customConte
 Now that you've moved the file to the trash, we need to get an updated version. 
 
 1. Open Terminal
-2. Change directories to `solrToEs/01-Solr`. This can be done by typing two separate commands:
+2. we can pull the file from GitHub.  
 ```
-cd solrToEs
-cd 01-Solr
+wget https://github.com/AntonioSoler/SolrToElastic/raw/main/solrToEs.zip
 ```
-Alternatively, you can also press **Tab** to auto populate the filepath. 
+This will download the new zip file into your folder, then use:
 
-3. Now that we're in the apropriate directory, we can pull the file from GitHub.  
 ```
-wget https://github.com/AntonioSoler/SolrToElastic/raw/main/solrToEs/01-Solr/customContentModel.xml
+unzip solrToEs.zip
 ```
-This will download the new XML file into your 01-Solr folder. If you have issues, you can download the file directly from the GitHub project.
+
+If you have issues, you can download the entire repository from GitHub project.
+
+https://github.com/AntonioSoler/SolrToElastic
 
 ### Starting the Solr Environment
 
