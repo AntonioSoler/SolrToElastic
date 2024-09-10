@@ -194,6 +194,7 @@ The images have already been downloaded to the VMs - the containers will spin up
 6. Click _Save_.
 7. Refresh the page and select **Test Connection**. This should be successful.
 8. Navigate to **localhost:9200/_cat/indices**. There will be a new index created "Alfresco" value (2 lines shown).
+9. Change the default **Transactional query option** of both FTS and CMIS search modes from "Use Database if posssible" to "Never use the database" 
 
 >> Verify in the ActiveMQ Web Console http://localhost:8161 the search queues have been created:
 ```
