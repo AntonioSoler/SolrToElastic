@@ -197,12 +197,12 @@ The images have already been downloaded to the VMs - the containers will spin up
 
 >> Verify in the ActiveMQ Web Console http://localhost:8161 the search queues have been created:
 ```
-  QUEUE	org.alfresco.search.content.event
- 	QUEUE	org.alfresco.search.contentrefresh.event
- 	QUEUE	org.alfresco.search.contentstore.event
- 	QUEUE	org.alfresco.search.metadata.event
- 	QUEUE	org.alfresco.search.metadata.retry.event
- 	QUEUE	org.alfresco.search.path.event
+QUEUE	org.alfresco.search.content.event
+QUEUE	org.alfresco.search.contentrefresh.event
+QUEUE	org.alfresco.search.contentstore.event
+QUEUE	org.alfresco.search.metadata.event
+QUEUE	org.alfresco.search.metadata.retry.event
+QUEUE	org.alfresco.search.path.event
 ```
 
 
