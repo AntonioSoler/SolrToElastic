@@ -189,7 +189,7 @@ The images have already been downloaded to the VMs - the containers will spin up
 2. Select **Alfresco Administration Console (admin only)**.
    * The User/Password is admin/admin
 3. In the Left Navigation Panel, select **Search Service**.
-4. Go to the _Search Service in User_ drop-down menu and slect **Elasticsearch**.
+4. Go to the _Search Service in User_ drop-down menu and select **Elasticsearch**.
 5. Go to _Elasticsearch Hostname_ and name it **elasticsearch**.
 6. Click _Save_.
 7. Refresh the page and select **Test Connection**. This should be successful.
