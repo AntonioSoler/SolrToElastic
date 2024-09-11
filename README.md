@@ -196,15 +196,7 @@ The images have already been downloaded to the VMs - the containers will spin up
 8. Navigate to **localhost:9200/_cat/indices**. There will be a new index created "Alfresco" value (2 lines shown).
 9. Change the default **Transactional query option** of both FTS and CMIS search modes from "Use Database if posssible" to "Never use the database" 
 
->> Verify in the ActiveMQ Web Console http://localhost:8161 the search queues have been created:
-```
-QUEUE	org.alfresco.search.content.event
-QUEUE	org.alfresco.search.contentrefresh.event
-QUEUE	org.alfresco.search.contentstore.event
-QUEUE	org.alfresco.search.metadata.event
-QUEUE	org.alfresco.search.metadata.retry.event
-QUEUE	org.alfresco.search.path.event
-```
+
 
 
 ### Cross-locale configuration
@@ -232,12 +224,21 @@ If you need cross locale configuration, add your configuration before starting t
 
 1. In the terminal, ensure you are in the `solrToEs/02-ES`.
 2. Run the command `docker compose up live-indexing`.
-3. Open the Web Broswer and navigate to **localhost:8080/workspace**.
-4. Select **Custom Personal Files**.
-5. Select **Shared**.
-6. Select the **Aspects** folder.
-7. Select **Upload**.
-8. Within the File Explorer, upload **solrToEs.zip**.
+3. Verify in the ActiveMQ Web Console http://localhost:8161 (password is admin:admin )the search queues have been created:
+```
+QUEUE	org.alfresco.search.content.event
+QUEUE	org.alfresco.search.contentrefresh.event
+QUEUE	org.alfresco.search.contentstore.event
+QUEUE	org.alfresco.search.metadata.event
+QUEUE	org.alfresco.search.metadata.retry.event
+QUEUE	org.alfresco.search.path.event
+```
+4. Open the Web Broswer and navigate to **localhost:8080/workspace**.
+5. Select **Custom Personal Files**.
+6. Select **Shared**.
+7. Select the **Aspects** folder.
+8. Select **Upload**.
+9. Within the File Explorer, upload **solrToEs.zip**.
 
 ### Testing Elasticsearch Live Indexing
 
