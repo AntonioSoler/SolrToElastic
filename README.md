@@ -250,12 +250,13 @@ QUEUE	org.alfresco.search.path.event
 5. Select **fts-alfresco** from the drop-down menu.
 6. Execute a search for **zip**. You should see the **solrToEs.zip** file - confirming that the Solr to Elasticsearch migration has occured successfully.
 
-We can do one more test to confirm that Solr is no longer indexing.
 
 
 ### tail-Indexing
 
 In the event that some unexpected event happens during the server operation there is the option to reindex a range of dates using the reindexing component with different parameters
+
+you can verify the status of the health of the index in the admin console in the **seach service** page, switch to the service status tab 
 
 You can see the configuration in **the docker-compose.yml** file in the section  **tail-re-rendexing**
 
