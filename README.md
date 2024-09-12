@@ -15,11 +15,7 @@ You should have already submitted the form for temporary Quay.io credentials. If
 Ensure that you have Docker and Docker Compose installed. You may need to run these with the `sudo` command.
 
 
-### Downloading the Custom Aspects File
-
-Currently, within the `solrToEs/01-Solr` directory, there is a file `customContentModel.xml`. Right click on this file and **Move To Trash**.
-
-Now that you've moved the file to the trash, we need to get an updated version. 
+### Downloading the project
 
 1. Open Terminal
 2. we can pull the file from GitHub.  
@@ -39,7 +35,6 @@ https://github.com/AntonioSoler/SolrToElastic
 ### Starting the Solr Environment
 
 1. Test the Docker installation with `docker run hello-world`.
-   * You may be prompted to enter the password for Administator. This is **password**.
   
 2. Enter `docker login quay.io`. You will need your Quay.io credentials from earlier.
    * You will be prompted for a Username and Password. 
@@ -57,7 +52,7 @@ Then bootstrap the environment with the command:
 ```
 docker compose up
 ```
-The images have already been downloaded to the VMs - the containers will spin up. This may take a few minutes.
+The images will download if you correctly entered the credentials to quay
 
 ### Uploading the Trial License
 
@@ -157,17 +152,20 @@ The images have already been downloaded to the VMs - the containers will spin up
 3. Select **Browse by Web Script Package**.
 4. Select **/alfresco/model**.
 5. Select **GET alfresco/s/model/ns-prefix-map**.
-6. Highlight and copy this text.
+
+   >>Note This is a custom jar that is added to to the YML file to generate the prefix map, review the content of the yml file to see how to use it in the furure
+   
+7. Highlight and copy this text.
    * Open the _Text Editor_ and paste this text here or from the browser select "Save as"
    * Save the document as **ModelPrefixes.json** to the `solrToEs/02-ES/re-indexing` folder. (
 
-7. In the file explorer, navigate to the `solrToEs/02-ES` folder.
-8. Open the **docker-compose.yml** file.
-9. Edit line 69 as shown below:
+8. In the file explorer, navigate to the `solrToEs/02-ES` folder.
+9. Open the **docker-compose.yml** file.
+10. Edit line 69 as shown below:
    * ./re-indexing/**ModelPrefixes.json**:/opt/reindex.prefixes.json
-10. Save the **docker-compose.yml** file.
-11. edit the **solrToEs/02-ES/re-indexing/mediation-filter.yml**
-12. we want to exclude the Confidential files from the indexing so we need to add the confidential Aspect after line 6 and put the lisbon:ConfidentialAspect
+11. Save the **docker-compose.yml** file.
+12. edit the **solrToEs/02-ES/re-indexing/mediation-filter.yml**
+13. we want to exclude the Confidential files from the indexing so we need to add the confidential Aspect after line 6 and put the ```lisbon:ConfidentialAspec```
 
 ### Deploying Elasticsearch
 
@@ -196,7 +194,7 @@ The images have already been downloaded to the VMs - the containers will spin up
 8. Navigate to **localhost:9200/_cat/indices**. There will be a new index created "Alfresco" value (2 lines shown).
 9. Change the default **Transactional query option** of both FTS and CMIS search modes from "Use Database if posssible" to "Never use the database" 
 
-
+>>>NOTE this is for the purpouse of the course to demonstrate that the confidential files are not excluded from Elastic indexing, in the future you may want to have it enabled
 
 
 ### Cross-locale configuration
