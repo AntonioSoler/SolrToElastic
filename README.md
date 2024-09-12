@@ -165,12 +165,15 @@ The images will download if you correctly entered the credentials to quay
    * ./re-indexing/**ModelPrefixes.json**:/opt/reindex.prefixes.json
 11. Save the **docker-compose.yml** file.
 12. edit the **solrToEs/02-ES/re-indexing/mediation-filter.yml**
-13. we want to exclude the Confidential files from the indexing so we need to add the confidential Aspect after line 6 and put the ```lisbon:ConfidentialAspec```
+13. we want to exclude the Confidential files from the indexing so we need to add the confidential Aspect after line 6 and insert the line
+```
+   - lisbon:ConfidentialAspec
+```
 
 ### Deploying Elasticsearch
 
 1. Open a new tab in Terminal
-   * The new tab will probably open in the 'solrToEs/01-Solr` directory. You need to be in the `solrToEs/02-ES` directory. You can do this by entering these two lines separately:
+   * The new tab will probably open in the `solrToEs/01-Solr` directory. You need to be in the `solrToEs/02-ES` directory. You can do this by entering these two lines separately:
      ```
      cd ..
      cd 02-ES
